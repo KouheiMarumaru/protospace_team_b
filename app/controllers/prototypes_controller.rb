@@ -1,5 +1,5 @@
 class PrototypesController < ApplicationController
-  before_action :set_prototype, only: :show
+  before_action :set_prototype, only: [:show, :edit, :update]
 
   def index
     @prototypes = Prototype.all
@@ -23,7 +23,12 @@ class PrototypesController < ApplicationController
   end
 
   def edit
-    @prototype = Prototype.find(params[:id])
+  end
+
+  def update
+    # binding.pry
+    @prototype.update(prototype_params_for_update)
+    redirect_to ({ action: 'show' }), notice: 'Success!'
   end
 
   private
@@ -39,6 +44,16 @@ class PrototypesController < ApplicationController
       :concept,
       :user_id,
       captured_images_attributes: [:content, :status]
+    )
+  end
+
+  def prototype_params_for_update
+    params.require(:prototype).permit(
+      :title,
+      :catch_copy,
+      :concept,
+      :user_id,
+      captured_images_attributes: [:id, :content, :status]
     )
   end
 end

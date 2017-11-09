@@ -10,9 +10,11 @@
           %h4 Main Thumbnail
           .cover-image-upload#main_image_uploader
             = f.fields_for :captured_images do |image|
-              %img
-              = image.file_field :content, required: true
-              = image.hidden_field :status, value: "main"
+              = if  :staqtus == 0
+                = image.file_field :content
+                -# = image_tag :content, id: "main_preview"
+                = image_tag @prototype.captured_images.first.content, id: "main_preview"
+                = image.hidden_field :status, value: "main"
         .col-md-12
           %h4 Sub Thumbnails
           %ul.proto-sub-list.list-group
@@ -26,9 +28,9 @@
       .row.proto-description
         .col-md-12
           %h4 Catch Copy
-          = f.text_field :catch_copy, require: true, placeholder: "Input Catch Copy"
+          = f.text_field :catch_copy, require: true, placeholder: "Catch Copy", value: "#{@prototype.catch_copy}"
         .col-md-12
           %h4 Concept
-          = f.text_area :concept, require: true, placeholder: "Input Concept"
+          = f.text_area :concept, require: true, placeholder: "Concept", value: "#{@prototype.concept}"
       .row.text-center.proto-btn
         = f.submit "PUBLISH", id: "button", class: "btn btn-lg btn-primary btn-block"

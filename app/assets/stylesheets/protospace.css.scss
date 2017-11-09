@@ -425,6 +425,10 @@ body {
     height: 500px;
     position: relative;
     margin-bottom: 20px;
+    #main_preview {
+      height: 100%;
+      width: 100%;
+    }
 
     input {
       position: absolute;
