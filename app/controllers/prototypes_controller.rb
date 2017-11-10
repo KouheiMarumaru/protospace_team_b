@@ -1,5 +1,6 @@
 class PrototypesController < ApplicationController
-  before_action :set_prototype, only: [:show, :edit, :update]
+
+  before_action :set_prototype, only: [:show, :edit, :update, :destroy]
 
   def index
     @prototypes = Prototype.all
@@ -29,6 +30,11 @@ class PrototypesController < ApplicationController
   def update
     @prototype.update(prototype_params_for_update)
     redirect_to ({ action: 'show' }), notice: '更新完了'
+  end
+  
+  def destroy
+    @prototype.destroy
+    redirect_to :root, notice: 'Prototype was successfully deleted.'
   end
 
   private
