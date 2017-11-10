@@ -425,6 +425,10 @@ body {
     height: 500px;
     position: relative;
     margin-bottom: 20px;
+    #main_preview {
+      height: 100%;
+      width: 100%;
+    }
 
     input {
       position: absolute;
@@ -447,6 +451,11 @@ body {
       background: image-url("noimage.png") #fff no-repeat center center;
       height: 200px;
       position: relative;
+
+      #sub_preview {
+        height: 100%;
+        width: 100%;
+      }
 
       input {
         position: absolute;

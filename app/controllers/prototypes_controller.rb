@@ -1,5 +1,6 @@
 class PrototypesController < ApplicationController
-  before_action :set_prototype, only: [:show, :destroy]
+
+  before_action :set_prototype, only: [:show, :edit, :update, :destroy]
 
   def index
     @prototypes = Prototype.all
@@ -22,6 +23,15 @@ class PrototypesController < ApplicationController
   def show
   end
 
+  def edit
+    @sub_count = @prototype.captured_images.length - 1
+  end
+
+  def update
+    @prototype.update(prototype_params_for_update)
+    redirect_to ({ action: 'show' }), notice: '更新完了'
+  end
+  
   def destroy
     @prototype.destroy
     redirect_to :root, notice: 'Prototype was successfully deleted.'
@@ -40,6 +50,16 @@ class PrototypesController < ApplicationController
       :concept,
       :user_id,
       captured_images_attributes: [:content, :status]
+    )
+  end
+
+  def prototype_params_for_update
+    params.require(:prototype).permit(
+      :title,
+      :catch_copy,
+      :concept,
+      :user_id,
+      captured_images_attributes: [:id, :content, :status]
     )
   end
 end
