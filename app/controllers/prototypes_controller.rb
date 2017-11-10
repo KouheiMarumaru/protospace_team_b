@@ -24,14 +24,13 @@ class PrototypesController < ApplicationController
   end
 
   def edit
-    @sub_count = @prototype.captured_images.length - 1
   end
 
   def update
     @prototype.update(prototype_params_for_update)
     redirect_to ({ action: 'show' }), notice: '更新完了'
   end
-  
+
   def destroy
     @prototype.destroy
   end
