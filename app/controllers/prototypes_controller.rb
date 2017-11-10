@@ -22,14 +22,9 @@ class PrototypesController < ApplicationController
   def show
   end
 
-
   def destroy
     @prototype.destroy
     redirect_to :root, notice: 'Prototype was successfully deleted.'
-  end
-
-  def edit
-    @prototype = Prototype.find(params[:id])
   end
 
   private
