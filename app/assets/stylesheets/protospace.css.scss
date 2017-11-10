@@ -452,6 +452,11 @@ body {
       height: 200px;
       position: relative;
 
+      #sub_preview {
+        height: 100%;
+        width: 100%;
+      }
+
       input {
         position: absolute;
         left: 0;
