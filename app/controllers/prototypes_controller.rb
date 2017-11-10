@@ -28,7 +28,7 @@ class PrototypesController < ApplicationController
 
   def update
     @prototype.update(prototype_params_for_update)
-    redirect_to ({ action: 'show' }), notice: 'Success!'
+    redirect_to ({ action: 'show' }), notice: '更新完了'
   end
 
   private
