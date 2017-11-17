@@ -8,9 +8,9 @@ CarrierWave.configure do |config|
     provider: 'AWS',
     aws_access_key_id: Rails.application.secrets.aws_access_key_id,
     aws_secret_access_key: Rails.application.secrets.aws_secret_access_key,
-    region: 'us-east-2'
+    region: ''
   }
 
   config.fog_directory  = 'protospaceteamb'
-  config.asset_host = 'https://s3-us-east-2.amazonaws.com/protospaceteamb'
+  config.asset_host = 'https://s3-ap-southeast-2.amazonaws.com/protospaceteamb'
 end
