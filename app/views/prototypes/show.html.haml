@@ -37,42 +37,61 @@
           %a{href: "#", class: "btn btn-default"} iPad
         %li
           %a{href: "#", class: "btn btn-default"} wireframe
-  //コメント
-  .row.proto-comments
-    %h4.col-md-12
-      Comments
+  / //コメント
+  / .row.proto-comments
+  /   %h4.col-md-12
+  /     Comments
 
-      %span.num (2)
-    #comment_area.col-md-8
-      //コメント一覧
-      #comment_list
-        .media
-          .media-left
-            %a{:href => "users/347"}
-              %img.media-object{:alt => "64x64", "data-holder" => "{\"rendered\":\"true\"}", "data-src" => "holder.js/64x64", :src => "", :style => "width: 64px; height: 64px;"}
-          .media-body
-            %h4#top-aligned-media.media-heading
-              matumaru
-              %a.anchorjs-link{:href => "#top-aligned-media"}
-                %span.anchorjs-icon
-            %p っっs
-        .media
-          .media-left
-            %a{:href => "users/347"}
-              %img.media-object{:alt => "64x64", "data-holder" => "{\"rendered\":\"true\"}", "data-src" => "holder.js/64x64", :src => "", :style => "width: 64px; height: 64px;"}
-          .media-body
-            %h4#top-aligned-media.media-heading
-              matumaru
-              %a.anchorjs-link{:href => "#top-aligned-media"}
-                %span.anchorjs-icon
-            %p っっss
-      //入力欄
-      %form#new_comment.form-inline{"accept-charset" => "UTF-8", :action => "/prototypes/500/comments", "data-remote" => "true", :method => "post"}
-        %input{:name => "utf8", :type => "hidden", :value => "✓"}
-        %h4 Write a comment
-        .row
-          .form-group.col-md-10
-            %textarea#comment_text.textform-control{:name => "comment[text]", :placeholder => "Your comments", :rows => "3"}
-            %input#comment_prototype_id{:name => "comment[prototype_id]", :type => "hidden", :value => "500"}
-          .form-group.col-md-2
-            %input.btn.btn-primary{:name => "commit", :type => "submit", :value => "Comment"}
+  /     //コメント件数の表示
+  /     %span.num (2)
+  /   #comment_area.col-md-8
+  /     //コメント一覧
+  /     #comment_list
+  /       .media
+  /         //コメントしたユーザーの画像
+  /         .media-left
+  /           %a{:href => "users/347"}
+  /             %img.media-object{:alt => "64x64", "data-holder" => "{\"rendered\":\"true\"}", "data-src" => "holder.js/64x64", :src => "", :style => "width: 64px; height: 64px;"}
+  /         //ユーザ名とコメント内容
+  /         .media-body
+  /           //コメントしたユーザー名
+  /           %h4#top-aligned-media.media-heading
+  /             matumaru
+  /             %a.anchorjs-link{:href => "#top-aligned-media"}
+  /               %span.anchorjs-icon
+  /           //コメントしたテキスト文
+  /           %p っっs
+  /     //入力欄
+  /     %form#new_comment.form-inline{"accept-charset" => "UTF-8", :action => "/prototypes/500/comments", "data-remote" => "true", :method => "post"}
+  /       %input{:name => "utf8", :type => "hidden", :value => "✓"}
+  /       %h4 Write a comment
+  /       .row
+  /         .form-group.col-md-10
+  /           %textarea#comment_text.textform-control{:name => "comment[text]", :placeholder => "Your comments", :rows => "3"}
+  /           %input#comment_prototype_id{:name => "comment[prototype_id]", :type => "hidden", :value => "500"}
+  /         .form-group.col-md-2
+  /           %input.btn.btn-primary{:name => "commit", :type => "submit", :value => "Comment"}
+
+  //フォームタグ
+  / .container
+  /   / ここからフォーム
+  /     = form_tag("/prototypes/#{@prototype.id}/comments", method: :post, id: "new_comment") do
+  /       %textarea{:cols => "30", :name => "text", :placeholder => "コメントする", :rows => "2", class: "textbox"}
+  /       %input{:type => "submit", :value => "SENT"}
+
+  //検証用
+  .container
+    / ここからフォーム
+    - if current_user
+      = form_for [@prototype, @comment],html: {id: 'new_comment'} do |f|
+        = f.text_area :text, placeholder: "Please comment", class: "textbox"
+        = f.submit value: "Send"
+    .comments
+      %h4 ＜コメント一覧＞
+      - if @comment.nil?
+        - @comments.each do |comment|
+          %p
+            %strong
+              = link_to comment.user.name, "/users/#{comment.user_id}"
+              ：
+            = comment.text
