@@ -1,6 +1,6 @@
 class PrototypesController < ApplicationController
 
-  before_action :set_prototype, only: [:show, :edit, :update, :destroy]
+  before_action :set_prototype, only: [:edit, :update, :destroy]
 
   def index
     @prototypes = Prototype.all.order("created_at DESC").page(params[:page]).per(5)
@@ -20,7 +20,10 @@ class PrototypesController < ApplicationController
      end
   end
 
+  # なぜこれで表示されたのか不明
   def show
+    @comment = Comment.new
+    @prototype = Prototype.find(params[:id])
   end
 
   def edit
