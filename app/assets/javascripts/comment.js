@@ -1,19 +1,17 @@
 $(function(){
   function buildHTML(comment){
-    var html = `<p class="addComment">
-                  <strong>
-                    <a href=${comment.id}>${comment.user_name}</a>
-                    ：
-                  </strong>
-                  ${comment.text}
-                </p>
-                <button id="deleteButton">
-                  Delete
-                <button>
-                <button id="editButton">
-                  Edit
-                <button>
-                `
+    var html = '<p class="addComment">' +
+                '<strong>' +
+                '<a href=' + comment.id + '>' + comment.user_name + '</a>'+
+                '：' +
+                '</strong>' + comment.text +
+                '</p>' +
+                '<button id="deleteButton">' +
+                'Delete' +
+                '<button>' +
+                '<button id="editButton">' +
+                'Edit' +
+                '<button>'
     return html;
   }
   //コメント追加
