@@ -12,5 +12,5 @@ CarrierWave.configure do |config|
   }
 
   config.fog_directory  = 'protospaceteamb'
-  config.asset_host = 'http://s3-ap-northeast-1.amazonaws.com'
+  config.asset_host = 'http://s3-ap-northeast-1.amazonaws.com/protospaceteamb'
 end
