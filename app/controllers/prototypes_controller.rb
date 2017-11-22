@@ -22,8 +22,9 @@ class PrototypesController < ApplicationController
 
   # なぜこれで表示されたのか不明
   def show
-    @comment = Comment.new
+    @new_comment = Comment.new
     @prototype = Prototype.find(params[:id])
+    @comments = @prototype.comments
   end
 
   def edit

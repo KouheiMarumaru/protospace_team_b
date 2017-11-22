@@ -83,15 +83,18 @@
   .container
     / ここからフォーム
     - if current_user
-      = form_for [@prototype, @comment],html: {id: 'new_comment'} do |f|
+      = form_for [@prototype, @new_comment],html: {id: 'new_comment'} do |f|
         = f.text_area :text, placeholder: "Please comment", class: "textbox"
         = f.submit value: "Send"
     .comments
       %h4 ＜コメント一覧＞
-      - if @comment.nil?
+      - if @comments.present?
         - @comments.each do |comment|
           %p
             %strong
               = link_to comment.user.name, "/users/#{comment.user_id}"
               ：
             = comment.text
+          - if comment.user_id == current_user.id
+            %button#deleteButton Delete
+            %button#editButton Edit
