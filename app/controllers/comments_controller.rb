@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
     @prototype = Prototype.find(params[:prototype_id])
     @comment = @prototype.comments.create(comment_params)
     respond_to do |format|
-      format.html { redirect_to prototype_comments_path(params[:prototype_id])  }
+      format.html { redirect_to prototype_path(params[:prototype_id])  }
       format.json
     end
   end
