@@ -1,0 +1,5 @@
+.container
+  - if current_user
+    = form_for [@prototype, @comment],html: {id: 'comment'} do |f|
+      = f.text_area :text,  class: "textbox"
+      = f.submit value: "Send"
